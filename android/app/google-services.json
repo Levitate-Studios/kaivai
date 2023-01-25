@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "878857894477",
+    "project_id": "khaivai-shopping",
+    "storage_bucket": "khaivai-shopping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878857894477:android:89363875320ad226aeba04",
+        "android_client_info": {
+          "package_name": "com.example.active_ecommerce_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878857894477-pqri8qmvqv8t96tbr3lalgeltge34nfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA38biR3Tu-easIX5SzcL_T-R_63ZeIvtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878857894477-pqri8qmvqv8t96tbr3lalgeltge34nfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878857894477:android:1accfffbe4b1c419aeba04",
+        "android_client_info": {
+          "package_name": "com.khaivai.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878857894477-pqri8qmvqv8t96tbr3lalgeltge34nfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA38biR3Tu-easIX5SzcL_T-R_63ZeIvtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878857894477-pqri8qmvqv8t96tbr3lalgeltge34nfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
