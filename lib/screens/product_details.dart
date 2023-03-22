@@ -1,45 +1,43 @@
+import 'dart:async';
+
+import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/text_styles.dart';
+import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:active_ecommerce_flutter/helpers/color_helper.dart';
+import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
+import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/chat_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/product_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/wishlist_repository.dart';
+import 'package:active_ecommerce_flutter/screens/brand_products.dart';
 import 'package:active_ecommerce_flutter/screens/cart.dart';
+import 'package:active_ecommerce_flutter/screens/chat.dart';
 import 'package:active_ecommerce_flutter/screens/common_webview_screen.dart';
 import 'package:active_ecommerce_flutter/screens/login.dart';
 import 'package:active_ecommerce_flutter/screens/product_reviews.dart';
 import 'package:active_ecommerce_flutter/screens/seller_details.dart';
+import 'package:active_ecommerce_flutter/screens/video_description_screen.dart';
 import 'package:active_ecommerce_flutter/ui_elements/list_product_card.dart';
 import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:expandable/expandable.dart';
-import 'dart:ui';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:active_ecommerce_flutter/repositories/product_repository.dart';
-import 'package:active_ecommerce_flutter/repositories/wishlist_repository.dart';
-import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/color_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
-import 'package:active_ecommerce_flutter/repositories/chat_repository.dart';
-import 'package:active_ecommerce_flutter/screens/chat.dart';
-import 'package:provider/provider.dart';
-import 'package:route_transitions/route_transitions.dart';
-import 'package:toast/toast.dart';
-import 'package:social_share/social_share.dart';
-import 'dart:async';
-import 'package:active_ecommerce_flutter/screens/video_description_screen.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:active_ecommerce_flutter/screens/brand_products.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
+import 'package:provider/provider.dart';
+import 'package:social_share/social_share.dart';
+import 'package:toast/toast.dart';
 
 class ProductDetails extends StatefulWidget {
   int id;
@@ -464,7 +462,8 @@ class _ProductDetailsState extends State<ProductDetails>
                           ),
                           onPressed: () {
                             onCopyTap(setState);
-                            SocialShare.copyToClipboard(_productDetails.link);
+                            SocialShare.copyToClipboard(
+                                text: _productDetails.link);
                           },
                         ),
                       ),
@@ -914,10 +913,10 @@ class _ProductDetailsState extends State<ProductDetails>
                               BoxDecorations.buildCircularButtonDecoration_1(),
                           width: 36,
                           height: 36,
-                          child: Badge(
+                          child: badge.Badge(
                             toAnimate: true,
                             stackFit: StackFit.loose,
-                            shape: BadgeShape.circle,
+                            shape: badge.BadgeShape.circle,
                             badgeColor: MyTheme.accent_color,
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
