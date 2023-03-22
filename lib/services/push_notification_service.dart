@@ -1,12 +1,12 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/screens/order_details.dart';
-import 'package:active_ecommerce_flutter/screens/login.dart';
+import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
+import 'package:active_ecommerce_flutter/screens/login.dart';
+import 'package:active_ecommerce_flutter/screens/order_details.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:one_context/one_context.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 
 final FirebaseMessaging _fcm = FirebaseMessaging.instance;
@@ -62,8 +62,9 @@ class PushNotificationService {
       var initializationSettingsAndroid = AndroidInitializationSettings(
           '@mipmap/ic_launcher'); // <- default icon name is @mipmap/ic_launcher
 
-      var initializationSettings =
-          InitializationSettings(android: initializationSettingsAndroid);
+      var initializationSettings = InitializationSettings(
+          android: initializationSettingsAndroid,
+          iOS: IOSInitializationSettings());
 
       flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
@@ -79,6 +80,7 @@ class PushNotificationService {
                 icon: android?.smallIcon,
                 // other properties...
               ),
+              iOS: IOSNotificationDetails(),
             ));
       }
     });

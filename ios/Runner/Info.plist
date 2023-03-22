@@ -74,6 +74,8 @@
 	<integer>1</integer>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>User can set address using phone location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>User can set address using phone location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>location when in use</string>
 	<key>NSMotionUsageDescription</key>
@@ -110,5 +112,8 @@
 	<false/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+
 </dict>
 </plist>
