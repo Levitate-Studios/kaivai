@@ -1,33 +1,32 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/other_config.dart';
-import 'package:active_ecommerce_flutter/social_config.dart';
-import 'package:active_ecommerce_flutter/ui_elements/auth_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/intl_phone_input.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:active_ecommerce_flutter/screens/registration.dart';
+import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
+import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:active_ecommerce_flutter/other_config.dart';
+import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:active_ecommerce_flutter/screens/password_forget.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
-import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:twitter_login/twitter_login.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'dart:math';
+import 'package:active_ecommerce_flutter/screens/registration.dart';
+import 'package:active_ecommerce_flutter/social_config.dart';
+import 'package:active_ecommerce_flutter/ui_elements/auth_ui.dart';
 import 'package:crypto/crypto.dart';
-import 'dart:convert';
-import 'dart:io' show Platform;
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:toast/toast.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -157,7 +156,6 @@ class _LoginState extends State<Login> {
         FacebookAuth.instance.logOut();
       }
       // final userData = await FacebookAuth.instance.getUserData(fields: "email,birthday,friends,gender,link");
-
     } else {
       print("....Facebook auth Failed.........");
       print(facebookLogin.status);
@@ -556,83 +554,83 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-              Visibility(
-                visible: allow_google_login.$ || allow_facebook_login.$,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Center(
-                      child: Text(
-                    AppLocalizations.of(context).login_screen_login_with,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                  )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Center(
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Visibility(
-                          visible: allow_google_login.$,
-                          child: InkWell(
-                            onTap: () {
-                              onPressedGoogleLogin();
-                            },
-                            child: Container(
-                              width: 28,
-                              child: Image.asset("assets/google_logo.png"),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: Visibility(
-                            visible: allow_facebook_login.$,
-                            child: InkWell(
-                              onTap: () {
-                                onPressedFacebookLogin();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/facebook_logo.png"),
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (allow_twitter_login.$)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: InkWell(
-                              onTap: () {
-                                onPressedTwitterLogin();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/twitter_logo.png"),
-                              ),
-                            ),
-                          ),
-                        if (Platform.isIOS)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            // visible: true,
-                            child: InkWell(
-                              onTap: () async {
-                                signInWithApple();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/apple_logo.png"),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Visibility(
+              //   visible: allow_google_login.$ || allow_facebook_login.$,
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(top: 20.0),
+              //     child: Center(
+              //         child: Text(
+              //       AppLocalizations.of(context).login_screen_login_with,
+              //       style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+              //     )),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 15.0),
+              //   child: Center(
+              //     child: Container(
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           Visibility(
+              //             visible: allow_google_login.$,
+              //             child: InkWell(
+              //               onTap: () {
+              //                 onPressedGoogleLogin();
+              //               },
+              //               child: Container(
+              //                 width: 28,
+              //                 child: Image.asset("assets/google_logo.png"),
+              //               ),
+              //             ),
+              //           ),
+              //           Padding(
+              //             padding: const EdgeInsets.only(left: 15.0),
+              //             child: Visibility(
+              //               visible: allow_facebook_login.$,
+              //               child: InkWell(
+              //                 onTap: () {
+              //                   onPressedFacebookLogin();
+              //                 },
+              //                 child: Container(
+              //                   width: 28,
+              //                   child: Image.asset("assets/facebook_logo.png"),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //           if (allow_twitter_login.$)
+              //             Padding(
+              //               padding: const EdgeInsets.only(left: 15.0),
+              //               child: InkWell(
+              //                 onTap: () {
+              //                   onPressedTwitterLogin();
+              //                 },
+              //                 child: Container(
+              //                   width: 28,
+              //                   child: Image.asset("assets/twitter_logo.png"),
+              //                 ),
+              //               ),
+              //             ),
+              //           if (Platform.isIOS)
+              //             Padding(
+              //               padding: const EdgeInsets.only(left: 15.0),
+              //               // visible: true,
+              //               child: InkWell(
+              //                 onTap: () async {
+              //                   signInWithApple();
+              //                 },
+              //                 child: Container(
+              //                   width: 28,
+              //                   child: Image.asset("assets/apple_logo.png"),
+              //                 ),
+              //               ),
+              //             ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         )
